@@ -8,7 +8,7 @@ import com.ulp.loginsharedpreference.model.Usuario;
 public class ApiCliente {
     private static SharedPreferences sp;
 
-    // Conectar a SharedPreferences
+    // conectar a SharedPreferences
     private static SharedPreferences conectar(Context context) {
         if (sp == null) {
             sp = context.getSharedPreferences("datos", 0);
@@ -16,7 +16,7 @@ public class ApiCliente {
         return sp;
     }
 
-    // Método para guardar el usuario en SharedPreferences
+    // mi mertodo para guardar el usuario en SharedPreferences
     public static void guardar(Context context, Usuario usuario) {
         SharedPreferences sp = conectar(context);
         SharedPreferences.Editor editor = sp.edit();
@@ -25,10 +25,10 @@ public class ApiCliente {
         editor.putString("nombre", usuario.getNombre());
         editor.putString("mail", usuario.getMail());
         editor.putString("password", usuario.getPassword());
-        editor.commit();  // Guardar los datos de manera inmediata
+        editor.commit();  // guardo datos rapido
     }
 
-    // Método para leer el usuario completo de SharedPreferences
+    // mi metodo para leer el usuario completo de SharedPreferences
     public static Usuario leer(Context context) {
         SharedPreferences sp = conectar(context);
         Long dni = sp.getLong("dni", -1);
@@ -40,7 +40,7 @@ public class ApiCliente {
         return  usuario;
     }
 
-    // Método para verificar el login
+    // mi metodo para verificar el login
     public static Usuario login(Context context, String mail, String password) {
         Usuario usuario = null;
         SharedPreferences sp = conectar(context);

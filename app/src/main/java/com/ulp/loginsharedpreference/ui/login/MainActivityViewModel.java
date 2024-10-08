@@ -13,15 +13,15 @@ import com.ulp.loginsharedpreference.request.ApiCliente;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-
-    // declaro variables q voy a observar
-    private MutableLiveData<Usuario> loginSuccess = new MutableLiveData<>();// puedo ver cualquier cambio osea la activity no usuario
-    private MutableLiveData<String> loginError = new MutableLiveData<>();// me dice el error
+    public MutableLiveData<String> email = new MutableLiveData<>(); // Email observable no se si dejarlo, VER OJO
+    public MutableLiveData<String> password = new MutableLiveData<>(); // Password observable
+    private MutableLiveData<Usuario> loginSuccess = new MutableLiveData<>();
+    private MutableLiveData<String> loginError = new MutableLiveData<>();
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
     }
-    // los metods para acceder al observable
+
     public LiveData<Usuario> getLoginSuccess() {
         return loginSuccess;
     }
@@ -29,21 +29,39 @@ public class MainActivityViewModel extends AndroidViewModel {
     public LiveData<String> getLoginError() {
         return loginError;
     }
-// aqui en este metodo valido la entrada del usuario
+
     public void login(Context context, String mail, String password) {
-        if (isInputValid(mail, password)) {
-            Usuario usuario = ApiCliente.login(context, mail, password);
+        if (isInputValid(mail, password)) {  // valido
+            Usuario usuario = ApiCliente.login(context, mail, password); // autentico usuario
             if (usuario != null) {
-                loginSuccess.setValue(usuario);  // le digo a mi login que tuve exito
+                loginSuccess.setValue(usuario);  //  exito
             } else {
-                loginError.setValue("Credenciales incorrectas");  // aviso que las credenciales son incorrectas
+                loginError.setValue("Credenciales incorrectas");  // AVISO error
             }
         } else {
-            loginError.setValue("Por favor, ingrese su correo y contraseña");  // si hay campos vacios me larga el mensaje
+            loginError.setValue("Por favor, ingrese su correo y contraseña");  // aviso si hay campo vacio ERROR
         }
     }
 
     private boolean isInputValid(String mail, String password) {
-        return !mail.trim().isEmpty() && !password.trim().isEmpty();  // valido que los campos no este vacios
+        return !mail.trim().isEmpty() && !password.trim().isEmpty();  // valido que los campos no esten vacios
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

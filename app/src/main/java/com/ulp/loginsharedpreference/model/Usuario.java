@@ -1,6 +1,8 @@
 package com.ulp.loginsharedpreference.model;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private long dni;
     private String apellido;
     private String nombre;
